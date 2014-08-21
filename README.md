@@ -6,12 +6,13 @@ To re-build, first install or link react and react-art into this directory. (To 
 
 Then run:
 
-    WEBAPP_PATH=/path/to/webapp
-    npm install webpack
+    npm install
 
-    NODE_ENV=production webpack --optimize-occurence-order
-    ( cat build/commons.js; echo ';'; cat build/react-with-addons.js ) >"$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/react.prod.js
-    cp build/react-art.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/react-art.prod.js
+    WEBAPP_PATH=/path/to/webapp
+
+    NODE_ENV=production webpack
+    cp build/react.prod.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
+    cp build/react-art.prod.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
 
 For the dev build, replace the `require('art/modes/fast');` line with:
 
@@ -24,9 +25,9 @@ For the dev build, replace the `require('art/modes/fast');` line with:
 
 so that the resulting bundle can be easily changed to use SVG instead of Canvas, then run:
 
-    NODE_ENV=development webpack --optimize-occurence-order
-    ( cat build/commons.js; echo ';'; cat build/react-with-addons.js ) >"$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/react.dev.js
-    cp build/react-art.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/react-art.dev.js
+    NODE_ENV=development webpack
+    cp build/react.dev.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
+    cp build/react-art.dev.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
 
 (ReactART doesn't rely on `__DEV__` conditionals, but webpack assigns different modules different IDs in the two cases, so we need both react-art.dev.js and react-art.prod.js here.)
 
