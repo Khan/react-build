@@ -10,7 +10,7 @@ Then run:
 
     WEBAPP_PATH=/path/to/webapp
 
-    NODE_ENV=production webpack
+    NODE_ENV=production node_modules/.bin/webpack
     cp build/react.prod.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
     cp build/react-art.prod.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
 
@@ -25,7 +25,7 @@ For the dev build, replace the `require('art/modes/fast');` line with:
 
 so that the resulting bundle can be easily changed to use SVG instead of Canvas, then run:
 
-    NODE_ENV=development webpack
+    NODE_ENV=development node_modules/.bin/webpack
     cp build/react.dev.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
     cp build/react-art.dev.js "$WEBAPP_PATH"/third_party/javascript-khansrc/react-compiled/
 
