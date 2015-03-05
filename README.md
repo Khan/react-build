@@ -2,7 +2,7 @@
 
 This repo contains tools for making a custom build of React and ReactART, made using webpack's bundle-splitting so that React can be loaded without ReactART. (The reverse isn't true; ReactART depends on React.)
 
-To re-build, first install or link react and react-art into this directory. (To install npm react from source, it's necessary to run `grunt build:npm-react` then link/install from build/npm-react/.)
+To re-build, first install or link react and react-art into this directory. (To install npm react from source, it's necessary to run `grunt build:npm-react` then link/install from build/npm-react/.) (To install react-art from source, you need to run `gulp` in the react-art directory.) Make sure you don't double-bundle react by bundling the copy of react in react-art's node_modules (if you're `npm link`ing, you should delete react-art/node_modules/react, since it will then use the peer react linked in the react-build folder).
 
 Then run:
 
