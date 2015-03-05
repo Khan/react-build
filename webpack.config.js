@@ -36,6 +36,7 @@ var plugins = [
       'process.env': {NODE_ENV: JSON.stringify(process.env.NODE_ENV)}
     }),
     new webpack.optimize.OccurenceOrderPlugin(true),
+    new webpack.BannerPlugin('@gen' + 'erated'),
 ];
 
 if (process.env.NODE_ENV === "production") {

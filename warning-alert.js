@@ -4,6 +4,15 @@
 
 var warning = function() {};
 
+// These warnings will only be logged to the console and will not cause an
+// alert() to be triggered. Be cautious when adding to this list, as warnings
+// almost always indicate future deprecations, so it's important to take
+// advantage of the warnings and avoid adding new deprecated code, especially
+// if the offending code can't easily be grepped for.
+var QUIET_WARNINGS = [
+  "React.addons.classSet will be deprecated in a future version. See http://fb.me/react-addons-classset"
+];
+
 if ("production" !== process.env.NODE_ENV) {
   var lastAlertTime = 0;
   warning = function(condition, format) {
@@ -20,7 +29,11 @@ if ("production" !== process.env.NODE_ENV) {
       var message = format.replace(/%s/g, function() {
         return args[argIndex++];
       });
-      console.warn('Warning: ' + message);
+      console.error('Warning: ' + message);
+
+      if (QUIET_WARNINGS.indexOf(format) !== -1) {
+        return;
+      }
 
       // Browsers tend to not like web pages that alert more than once per
       // second or so, so we'll only show one every two seconds to be safe...
