@@ -1,0 +1,18 @@
+diff --git a/src/ReactART.js b/src/ReactART.js
+index 2393ba5..81f6352 100644
+--- a/src/ReactART.js
++++ b/src/ReactART.js
+@@ -11,7 +11,12 @@
+ 
+ "use strict";
+ 
+-require('art/modes/fast'); // Flip this to DOM mode for debugging
++var mode = "fast"; // Flip this to DOM mode for debugging
++if (mode === "fast") {
++      require('art/modes/fast');
++} else {
++      require('art/modes/dom');
++}
+ 
+ var Transform = require('art/core/transform');
+ var Mode = require('art/modes/current');
