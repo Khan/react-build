@@ -10,7 +10,13 @@ var warning = function() {};
 // advantage of the warnings and avoid adding new deprecated code, especially
 // if the offending code can't easily be grepped for.
 var QUIET_WARNINGS = [
-  "React.addons.classSet will be deprecated in a future version. See http://fb.me/react-addons-classset"
+];
+
+// These warnings won't even be logged to the console, so you should take extra
+// care when adding to this list that these warnings aren't and won't be
+// problematic if developers don't clean them up.
+var REALLY_QUIET_WARNINGS = [
+  "require('react/addons') is deprecated. Access using require('react-addons-{addon}') instead."
 ];
 
 if ("production" !== process.env.NODE_ENV) {
@@ -25,6 +31,10 @@ if ("production" !== process.env.NODE_ENV) {
     }
 
     if (!condition) {
+      if (REALLY_QUIET_WARNINGS.indexOf(format) !== -1) {
+        return;
+      }
+
       var argIndex = 0;
       var message = format.replace(/%s/g, function() {
         return args[argIndex++];
@@ -40,7 +50,7 @@ if ("production" !== process.env.NODE_ENV) {
       // hopefully people will notice the second alert if they fix the first
       // one and reload.
       if (lastAlertTime + 2000 < Date.now()) {
-        alert('Dev-only warning: ' + message);
+        typeof alert !== "undefined" && alert('Dev-only warning: ' + message);
         lastAlertTime = Date.now();
       }
     }

@@ -23,8 +23,8 @@ header()
     echo
 }
 
-REACT_VERSION=0.13.0-rc2  # NPM version
-REACT_ART_SHA=7012fb8a2a  # Git SHA for facebook/react-art
+REACT_VERSION=0.14.0-rc1  # NPM version
+REACT_ART_SHA=b3ebb2ed7  # Git SHA for facebook/react-art
 
 if [[ -e "react-art" ]]; then
     echo >&2 "Old react-art already exists. Run 'make clean' and try again."
@@ -36,6 +36,7 @@ git clone git@github.com:facebook/react-art
 
 header "Setting up production build"
 npm install "react@${REACT_VERSION}"
+npm install "react-dom@${REACT_VERSION}"
 npm link ./react-art
 
 cd react-art

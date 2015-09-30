@@ -12,7 +12,7 @@ function regexpEscape(s) {
 assert.ok(process.env.NODE_ENV, "Need to set NODE_ENV when bundling");
 
 // We'll replace the default warning.js with one of our own...
-var warningPath = path.join(__dirname, "node_modules/react/lib/warning.js");
+var warningPath = path.join(__dirname, "node_modules/react/node_modules/fbjs/lib/warning.js");
 var newWarningPath = path.join(__dirname, "warning-alert.js");
 assert.ok(fs.existsSync(warningPath), "Where'd warning go?");
 
