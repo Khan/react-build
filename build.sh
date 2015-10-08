@@ -23,8 +23,8 @@ header()
     echo
 }
 
-REACT_VERSION=0.14.0-rc1  # NPM version
-REACT_ART_SHA=b3ebb2ed7  # Git SHA for facebook/react-art
+REACT_VERSION=0.14.0  # NPM version
+REACT_ART_SHA=v0.14.0  # Git SHA/tag for facebook/react-art
 
 if [[ -e "react-art" ]]; then
     echo >&2 "Old react-art already exists. Run 'make clean' and try again."
