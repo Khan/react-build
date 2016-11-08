@@ -16,7 +16,6 @@ var QUIET_WARNINGS = [
 // care when adding to this list that these warnings aren't and won't be
 // problematic if developers don't clean them up.
 var REALLY_QUIET_WARNINGS = [
-  "require('react/addons') is deprecated. Access using require('react-addons-{addon}') instead."
 ];
 
 if ("production" !== process.env.NODE_ENV) {

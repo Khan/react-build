@@ -1,18 +1,24 @@
 diff --git a/src/ReactART.js b/src/ReactART.js
-index 2393ba5..81f6352 100644
+index 1e7f78b..03e28db 100644
 --- a/src/ReactART.js
 +++ b/src/ReactART.js
-@@ -11,7 +11,12 @@
- 
- "use strict";
- 
--require('art/modes/fast'); // Flip this to DOM mode for debugging
-+var mode = "fast"; // Flip this to DOM mode for debugging
+@@ -11,9 +11,16 @@
+
+ 'use strict';
+
+-require('art/modes/current').setCurrent(
+-  require('art/modes/fast-noSideEffects') // Flip this to DOM mode for debugging
+-);
++const mode = "fast"; // Flip this to DOM mode for debugging
 +if (mode === "fast") {
-+      require('art/modes/fast');
++  require('art/modes/current').setCurrent(
++    require('art/modes/fast-noSideEffects')
++  );
 +} else {
-+      require('art/modes/dom');
++  require('art/modes/current').setCurrent(
++    require('art/modes/dom')
++  );
 +}
- 
- var Transform = require('art/core/transform');
- var Mode = require('art/modes/current');
+
+ const Transform = require('art/core/transform');
+ const Mode = require('art/modes/current');

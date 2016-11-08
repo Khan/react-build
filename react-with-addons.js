@@ -1,28 +1,9 @@
-window.React = require('react/addons');
+// HACK(emily): Officially, the `react-with-addons` require went away with
+// React 15, this require is just a hack so we can continue bundling them all
+// together. In the future we should probably explicitly be requiring the
+// addons from the separate npm packages.
+window.React = require('react/lib/ReactWithAddons');
 window.React.__internalReactMount = require('react/lib/ReactMount');
 window.React.__internalReactDOM = require('react-dom');
 window.React.__internalAddons = window.React.addons;
-
-if ("production" !== process.env.NODE_ENV) {
-    var warning =
-            require('./node_modules/react/node_modules/fbjs/lib/warning');
-
-    window.React.addons = {};
-
-    Object.keys(window.React.__internalAddons).forEach(function(addonName) {
-        Object.defineProperty(
-            window.React.addons,
-            addonName,
-            {
-                get: function() {
-                    warning(
-                        false,
-                        "Using React.addons.%s is deprecated. " +
-                            "Use require('react-addons-{addon}') instead.",
-                        addonName);
-                    return window.React.__internalAddons[addonName];
-                }
-            }
-        );
-    });
-}
+delete window.React.addons;
