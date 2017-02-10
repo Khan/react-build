@@ -5,5 +5,6 @@
 window.React = require('react/lib/ReactWithAddons');
 window.React.__internalReactMount = require('react/lib/ReactMount');
 window.React.__internalReactDOM = require('react-dom');
+window.React.__internalReactDOMServer = require('react-dom/server');
 window.React.__internalAddons = window.React.addons;
 delete window.React.addons;
