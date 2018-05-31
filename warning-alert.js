@@ -18,6 +18,17 @@ var QUIET_WARNINGS = [
 var REALLY_QUIET_WARNINGS = [
 ];
 
+// These warnings will be logged in the console, but not as errors. These are
+// specific warnings we wish to ignore when running React fixtures tests.
+var IGNORE_FIXTURES_WARNINGS = [
+  // These tags when used as React component root generate warnings
+  // "not recognized by the browser" when testings fixtures with PhantomJS,
+  // yet we know these tags, and components, work in production.
+  "The tag <g> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.",
+  "The tag <polyline> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.",
+  "The tag <video> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.",
+];
+
 if ("production" !== process.env.NODE_ENV) {
   var lastAlertTime = 0;
   warning = function(condition, format) {
@@ -38,6 +49,13 @@ if ("production" !== process.env.NODE_ENV) {
       var message = format.replace(/%s/g, function() {
         return args[argIndex++];
       });
+
+      if (typeof window !== "undefined" && window.__TESTING_FIXTURES__ &&
+          IGNORE_FIXTURES_WARNINGS.indexOf(message) !== -1) {
+        console.warn('Warning: ' + message);
+        return;
+      }
+
       console.error('Warning: ' + message);
 
       if (QUIET_WARNINGS.indexOf(format) !== -1) {

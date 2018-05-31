@@ -1,8 +1,6 @@
 OUTPUT_DIR = build
 OUTPUT_FILES = $(OUTPUT_DIR)/react.prod.js \
-			   $(OUTPUT_DIR)/react-art.prod.js \
-			   $(OUTPUT_DIR)/react.dev.js \
-			   $(OUTPUT_DIR)/react-art.dev.js
+			   $(OUTPUT_DIR)/react.dev.js
 
 $(OUTPUT_FILES):
 	RUN_FROM_MAKE=1 ./build.sh
@@ -17,7 +15,8 @@ endif
 
 .PHONY: clean
 clean:
-	rm -rf $(OUTPUT_DIR) react-art
+	rm -rf node_modules
+	rm build/*.js
 	@git status --short | diff -q - /dev/null >/dev/null 2>&1 || \
 		echo "Note: you have unstaged changes or untracked files. " \
 			 "Consider removing these with 'git reset --hard' or 'git clean -f'."
